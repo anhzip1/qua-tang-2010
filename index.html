@@ -18,8 +18,12 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            align-items: flex-start;
+        
+            /* Cho phép cuộn xuống khi nội dung dài */
+            overflow-x: hidden;
+            overflow-y: auto;
+        
             font-family: "Segoe UI", sans-serif;
             background: linear-gradient(135deg, #ffe4ec, #fff5f7, #fce1ff);
         }
