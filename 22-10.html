@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Món quà nhỏ dành cho em 💗</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #ffe4ec, #fff5f7, #fce1ff);
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Màn hình phong thư */
+
+        .envelope {
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope-box {
+            position: relative;
+            width: 230px;
+            height: 160px;
+            margin: 30px auto;
+            background: #ff8fab;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px #e88aa755;
+        }
+
+        .envelope-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 115px solid transparent;
+            border-right: 115px solid transparent;
+            border-top: 100px solid #ffb3c6;
+            transform-origin: top;
+            transition: 0.8s;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            top: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 45px;
+            z-index: 3;
+        }
+
+        h1 {
+            color: #c9184a;
+            font-size: 27px;
+            margin-bottom: 15px;
+        }
+
+        .intro {
+            color: #9d174d;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .open-btn {
+            padding: 13px 30px;
+            border: none;
+            border-radius: 30px;
+            background: #e75480;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px #e7548050;
+            transition: 0.3s;
+        }
+
+        .open-btn:hover {
+            background: #c9184a;
+            transform: translateY(-3px);
+        }
+
+        /* Phần quà sau khi mở */
+
+        .gift {
+            display: none;
+            animation: appear 1.2s ease forwards;
+        }
+
+        .flowers {
+            position: relative;
+            height: 230px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .flower {
+            font-size: 65px;
+            opacity: 0;
+            transform: scale(0) translateY(60px);
+            animation: bloom 1s ease forwards;
+        }
+
+        .flower:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .flower:nth-child(2) {
+            font-size: 90px;
+            animation-delay: 0.7s;
+        }
+
+        .flower:nth-child(3) {
+            animation-delay: 1.2s;
+        }
+
+        .flower:nth-child(4) {
+            animation-delay: 1.7s;
+        }
+
+        .letter {
+            background: #ffffffd9;
+            padding: 28px 25px;
+            border-radius: 22px;
+            box-shadow: 0 8px 35px #d86b8b25;
+            color: #7b284b;
+            line-height: 1.9;
+        }
+
+        .letter h2 {
+            color: #d6336c;
+            margin-bottom: 15px;
+            font-size: 25px;
+        }
+
+        .letter p {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .signature {
+            color: #d6336c;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Hiệu ứng */
+
+        @keyframes bloom {
+            0% {
+                opacity: 0;
+                transform: scale(0) translateY(60px);
+            }
+            70% {
+                transform: scale(1.2) translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hoa và trái tim bay */
+
+        .floating {
+            position: fixed;
+            bottom: -40px;
+            pointer-events: none;
+            animation: floatUp 5s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0);
+            }
+            15% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-110vh) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .flowers {
+                height: 180px;
+                gap: 5px;
+            }
+
+            .flower {
+                font-size: 48px;
+            }
+
+            .flower:nth-child(2) {
+                font-size: 68px;
+            }
+
+            .letter {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Màn hình đầu tiên -->
+        <div class="envelope" id="envelope">
+
+            <h1>Gửi em, người anh thương 💗</h1>
+
+            <p class="intro">
+                Có một món quà nhỏ anh muốn dành riêng cho em.<br>
+                Em hãy mở ra nhé!
+            </p>
+
+            <div class="envelope-box">
+                <div class="heart">💌</div>
+            </div>
+
+            <button class="open-btn" onclick="openGift()">
+                Mở món quà của anh
+            </button>
+
+        </div>
+
+        <!-- Món quà sau khi mở -->
+        <div class="gift" id="gift">
+
+            <div class="flowers">
+                <div class="flower">🌷</div>
+                <div class="flower">🌹</div>
+                <div class="flower">🌸</div>
+                <div class="flower">🌼</div>
+            </div>
+
+            <div class="letter">
+
+                <h2>Chúc mừng ngày 20/10 💐</h2>
+
+                <p>Gửi cô gái anh thương,</p>
+
+                <p>
+                    Nhân ngày 20/10, anh chúc em luôn xinh đẹp,
+                    vui vẻ và hạnh phúc.
+                    Mong rằng mỗi ngày của em đều có thật nhiều
+                    niềm vui, những điều dịu dàng và những nụ cười.
+                </p>
+
+                <p>
+                    Cảm ơn em đã xuất hiện trong cuộc đời anh.
+                    Anh mong mình sẽ không phải là lốp💐,
+                    được quan tâm và cùng em trải qua thật nhiều
+                    những thứ đáng nhớ.
+                </p>
+
+                <p>
+                    Dù hôm nay hay những ngày bình thường khác,
+                    anh vẫn mong em biết rằng:
+                    <strong>em luôn là một điều rất đặc biệt đối với anh.</strong>
+                </p>
+
+                <p class="signature">
+                    Thương em thật nhiều ❤️<br>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function openGift() {
+
+            // Ẩn phong thư
+            document.getElementById("envelope").style.display = "none";
+
+            // Hiện món quà
+            document.getElementById("gift").style.display = "block";
+
+            // Cho hoa và trái tim bay lên
+            createFlowers();
+        }
+
+        function createFlowers() {
+
+            const flowers = ["🌸", "🌷", "🌹", "💗", "🌼", "💕"];
+
+            // Tạo 35 bông hoa bay lên
+            for (let i = 0; i < 35; i++) {
+
+                const flower = document.createElement("div");
+
+                flower.className = "floating";
+
+                flower.innerHTML = flowers[
+                    Math.floor(Math.random() * flowers.length)
+                ];
+
+                // Vị trí xuất hiện ngẫu nhiên
+                flower.style.left = Math.random() * 100 + "vw";
+
+                // Thời gian bay khác nhau
+                flower.style.animationDuration =
+                    (3 + Math.random() * 4) + "s";
+
+                flower.style.fontSize =
+                    (20 + Math.random() * 25) + "px";
+
+                document.body.appendChild(flower);
+
+                // Xóa hoa sau khi bay xong
+                setTimeout(() => {
+                    flower.remove();
+                }, 7500);
+            }
+        }
+    </script>
+
+</body>
+</html>
